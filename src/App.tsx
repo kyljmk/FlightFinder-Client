@@ -1,19 +1,13 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Search from "./screen/Search"
 import './App.css';
+import Search from './Screens/Search';
 
 function App() {
-  useEffect(() => {
-    fetch("http://localhost:5237/flights")
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }, [])
-  
-  return (
+    return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Search />} />
+        <Route path='/' element={<Search />} />
       </Routes>
     </BrowserRouter>
   );
