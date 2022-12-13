@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { FlightSearch } from "../Types";
+import { IFlightSearch } from "../Types";
 
 function Search() {
-    const [flightSearch, setFlightSearch] = useState<FlightSearch>({
+    const [flightSearch, setFlightSearch] = useState<IFlightSearch>({
         startDate: new Date(),
         endDate: new Date(),
         option: "Return",
-        departure: "",
-        arrival: "",
+        departureDestination: "",
+        arrivalDestination: "",
         adults: 0,
         children: 0
     })
+
+    const now = new Date()
+    console.log(now.toLocaleString("sv", { timeZone: "Europe/Paris"}));
   
     const selectionRange = {
         startDate: flightSearch.startDate,
@@ -21,29 +24,33 @@ function Search() {
         key: "selection",
       };
 
-      const handleSelect = (ranges: any) => {
+    const handleSelect = (ranges: any) => {
         setFlightSearch(prev => ({
             ...prev,
             startDate: ranges.selection.startDate,
             endDate: flightSearch.option === "One-Way" ? ranges.selection.startDate : ranges.selection.endDate
         }));
-      };
+    };
 
-      const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const {name, value } = e.target;
         setFlightSearch(prev => ({
             ...prev,
             [name] : value,
             endDate: flightSearch.startDate,
         }))
-      }
+    }
+
+    const handleClick = () => {
+        console.log("Hello")
+    }
 
     return (
         <div>
             <h1>Search</h1>
             <div>
-                <input type="text" name="departure" value={flightSearch.departure} onChange={handleChange} /> <br/>
-                <input type="text" name="arrival" value={flightSearch.arrival} onChange={handleChange} />
+                <input type="text" name="departureDestination" value={flightSearch.departureDestination} onChange={handleChange} /> <br/>
+                <input type="text" name="arrivalDestination" value={flightSearch.arrivalDestination} onChange={handleChange} />
             </div>
             <div onChange={handleChange}>
                 <input type="radio" value="Return" name="option" id="radio-return" defaultChecked={true} />
@@ -56,7 +63,8 @@ function Search() {
             minDate={new Date()}
             rangeColors={["#f7c9d4"]}
             onChange={handleSelect}
-          />
+            /><br />
+            <button onClick={handleClick}>Search</button>
         </div>
     )
 };
