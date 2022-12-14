@@ -30,7 +30,14 @@ export interface Prices {
     child: number
 }
 
-export type InfoContextType = {
+export interface InfoContextType {
     searchResults: ISearchResults[];
     setSearchResults: (searchResults: ISearchResults[]) => void;
-  };
+};
+
+export interface FlightCardProps {
+    departureTime: Date,
+    arrivalTime: Date,
+    availableSeats: number,
+    prices: Prices
+}

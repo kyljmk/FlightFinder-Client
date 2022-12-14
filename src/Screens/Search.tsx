@@ -66,6 +66,8 @@ function Search() {
             <div>
                 <input type="text" name="departureDestination" value={flightSearch.departureDestination} onChange={handleChange} /> <br/>
                 <input type="text" name="arrivalDestination" value={flightSearch.arrivalDestination} onChange={handleChange} />
+                <input type="number" name="adults" value={flightSearch.adults} onChange={handleChange} />
+                <input type="number" name="children" value={flightSearch.children} onChange={handleChange} />
             </div>
             <div onChange={handleChange}>
                 <input type="radio" value="Return" name="option" id="radio-return" defaultChecked={true} />
