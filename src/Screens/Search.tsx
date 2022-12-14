@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { IFlightSearch } from "../Types";
+import { useNavigate } from "react-router-dom";
+import useInfo from "../Hooks/UseInfo";
+import { IFlightSearch, InfoContextType } from "../Types";
 
 function Search() {
     const [flightSearch, setFlightSearch] = useState<IFlightSearch>({
@@ -14,9 +16,6 @@ function Search() {
         adults: 0,
         children: 0
     })
-
-    const now = new Date()
-    console.log(now.toLocaleString("sv", { timeZone: "Europe/Paris"}));
   
     const selectionRange = {
         startDate: flightSearch.startDate,
@@ -41,8 +40,24 @@ function Search() {
         }))
     }
 
+    const formattedStartDate: string = (flightSearch.startDate.toLocaleString("sv", { timeZone: "Europe/Paris"})).slice(0,10);
+    const formattedEndDate: string = (flightSearch.endDate.toLocaleString("sv", { timeZone: "Europe/Paris"})).slice(0,10);
+
+    const { setSearchResults } = useInfo() as InfoContextType;
+    const navigate = useNavigate();
+
     const handleClick = () => {
-        console.log("Hello")
+        if(flightSearch.option === "One-Way"){
+            fetch(`http://localhost:5237/Flights?StartDate=${formattedStartDate}%2000%3A00%3A00.0000000&Option=${flightSearch.option}&Departure=${flightSearch.departureDestination}&Arrival=${flightSearch.arrivalDestination}&Adults=${flightSearch.adults}&Children=${flightSearch.children}`)
+            .then(response => response.json())
+            .then(data => setSearchResults(data));
+        }
+        if (flightSearch.option === "Return"){
+            fetch(`http://localhost:5237/Flights?StartDate=${formattedStartDate}%2000%3A00%3A00.0000000&EndDate=${formattedEndDate}%2000%3A00%3A00.0000000&Option=${flightSearch.option}&Departure=${flightSearch.departureDestination}&Arrival=${flightSearch.arrivalDestination}&Adults=${flightSearch.adults}&Children=${flightSearch.children}`)
+            .then(response => response.json())
+            .then(data => setSearchResults(data));
+        }
+        navigate("/Results");
     }
 
     return (
@@ -60,7 +75,8 @@ function Search() {
             </div>
             <DateRangePicker
             ranges={[selectionRange]}
-            minDate={new Date()}
+            minDate={new Date('December 12, 2022')}
+            maxDate={new Date('December 19, 2022')}
             rangeColors={["#f7c9d4"]}
             onChange={handleSelect}
             /><br />

@@ -29,3 +29,8 @@ export interface Prices {
     adult: number,
     child: number
 }
+
+export type InfoContextType = {
+    searchResults: ISearchResults[];
+    setSearchResults: (searchResults: ISearchResults[]) => void;
+  };
