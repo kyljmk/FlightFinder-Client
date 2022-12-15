@@ -12,27 +12,107 @@
 }
  
 .App {
-  margin-top: 40px;
+  margin-top: 60px;
   text-align: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 375px;
-  height: 210px;
+  width: 100vw;
+  height: 230px;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.App::before {    
+  content: "";
+  background-image: url(./background-img.jpeg);
+  background-size: cover;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 1;
 }
 
 .search {
+  position: relative;
   background-color: white;
   width: 250px;
   height: 150px;
-  margin: 10px 0 10px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  border-radius: 15px;
+  box-shadow: 0px 1px 4px black;
+  padding: 10px 0 10px 0;
+}
+
+.search--departure--input,
+.search--arrival--input,
+.search--adults--input,
+.search--children--input {
+  margin-bottom: 15px;
+  width: 80%;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 14px;
+  color: gray;
+  border: solid 1px #f7c9d4;
+}
+
+.search--departure--input:focus,
+.search--arrival--input:focus,
+.search--adults--input:focus,
+.search--chidren--input:focus {
+  outline: none;
+  color: gray;
+}
+
+.search--buttons {
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.search--buttons--next,
+.search--buttons--back, 
+.search--buttons--search {
+  border: 1px solid #f7c9d4;
+  color: #f7c9d4;
+  background-color: white;
+  padding: 7px 15px 7px 15px;
+  border-radius: 10px;
+  font-weight: 900;
+  font-size: 18px;
+  margin: 0;
+}
+
+.search--buttons--next,
+.search--buttons--search {
+  color: white;
+  background-color: #f7c9d4;
+}
+
+.search--buttons--next:hover,
+.search--buttons--back:hover,
+.search--buttons--search:hover {
+  scale: 105%;
+  opacity: 0.8;
+  transition: 0.15s ease-in-out;
+}
+
+.search--buttons--next:active,
+.search--buttons--back:active,
+.search--buttons--back:active {
+  scale: 95%
 }
 
 .search--dateRange {
+}
+
+.results {
+  position: relative;
 }

@@ -21,11 +21,11 @@ function Results () {
     console.log(searchResults)
 
     return (
-        <>
+        <div className="results">
             <h1>Results</h1>
             <h2>List of Results For: {flightSearch.departureDestination} - {flightSearch.arrivalDestination} ({flightSearch.option})</h2>
             {flightCards}
-        </>
+        </div>
     )
 }
 

@@ -17,8 +17,8 @@ export const InfoProvider = ({ children }: {children: ReactNode}) => {
         option: "Return",
         departureDestination: "",
         arrivalDestination: "",
-        adults: 0,
-        children: 0
+        adults: undefined,
+        children: undefined
     })
    
     return (

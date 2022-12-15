@@ -6,8 +6,8 @@ export interface IFlightSearch {
     option: string,
     departureDestination: string,
     arrivalDestination: string,
-    adults: number,
-    children: number
+    adults: number | undefined,
+    children: number | undefined
 }
 
 export interface ISearchResults {

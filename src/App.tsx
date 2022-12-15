@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="App" style={{ backgroundImage: `url(${background})` }}>
+      <div className="App">
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<Search />} />
@@ -22,3 +22,5 @@ function App() {
 }
 
 export default App;
+
+// style={{ backgroundImage: `url(${background})`}}
