@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface IFlightSearch {
     startDate: Date,
     endDate: Date,
@@ -32,12 +34,13 @@ export interface Prices {
 
 export interface InfoContextType {
     searchResults: ISearchResults[];
-    setSearchResults: (searchResults: ISearchResults[]) => void;
+    setSearchResults: Dispatch<SetStateAction<ISearchResults[]>>;
+    flightSearch: IFlightSearch;
+    setFlightSearch: Dispatch<SetStateAction<IFlightSearch>>;
 };
 
 export interface FlightCardProps {
     departureTime: Date,
     arrivalTime: Date,
-    availableSeats: number,
     prices: Prices
 }

@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { createContext, useContext } from "react";
-import { InfoContextType, ISearchResults } from "../Types";
+import { IFlightSearch, InfoContextType, ISearchResults } from "../Types";
 
 const InfoContext = createContext<InfoContextType | null>(null);
 
@@ -10,12 +10,23 @@ export const InfoProvider = ({ children }: {children: ReactNode}) => {
         departureDestination: "",
         arrivalDestination: "",
         itineraries: []
-    }])
+    }]);
+    const [flightSearch, setFlightSearch] = useState<IFlightSearch>({
+        startDate: new Date(),
+        endDate: new Date(),
+        option: "Return",
+        departureDestination: "",
+        arrivalDestination: "",
+        adults: 0,
+        children: 0
+    })
    
     return (
         <InfoContext.Provider value={{
             searchResults,
             setSearchResults,
+            flightSearch,
+            setFlightSearch
         }}>{children}</InfoContext.Provider>
     )
 }
